@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.21" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.20" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.15.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\OA.WebAuthLibrary\OA.WebAuthLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DataShared">
+      <HintPath>..\SharedDLL\DataShared.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetZip">
+      <HintPath>..\SharedDLL\DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="Helper">
+      <HintPath>..\SharedDLL\Helper.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\SharedDLL\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OA.AuthLibrary">
+      <HintPath>..\SharedDLL\OA.AuthLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Utilities">
+      <HintPath>..\SharedDLL\Utilities.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+
+</Project>

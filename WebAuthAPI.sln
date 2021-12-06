@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31911.196
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAuthAPI", "WebAuthAPI.csproj", "{03D14E1A-F2F3-40A3-8AA5-425CEE44B541}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OA.WebAuthLibrary", "..\Shared\OA.WebAuthLibrary\OA.WebAuthLibrary.csproj", "{CC29500B-B9BB-4E96-A018-64ABEAB4CFFD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03D14E1A-F2F3-40A3-8AA5-425CEE44B541}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03D14E1A-F2F3-40A3-8AA5-425CEE44B541}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03D14E1A-F2F3-40A3-8AA5-425CEE44B541}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03D14E1A-F2F3-40A3-8AA5-425CEE44B541}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC29500B-B9BB-4E96-A018-64ABEAB4CFFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC29500B-B9BB-4E96-A018-64ABEAB4CFFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC29500B-B9BB-4E96-A018-64ABEAB4CFFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC29500B-B9BB-4E96-A018-64ABEAB4CFFD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3934E2E2-C0F7-4B95-A69B-40FAD3FF8936}
+	EndGlobalSection
+EndGlobal
