@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using WebAuthAPI.Hubs;
 
 namespace WebAuthAPI
 {
@@ -75,6 +77,11 @@ namespace WebAuthAPI
 
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
             services.AddSession();
+
+            services.AddSignalR(opt =>
+            {
+                opt.EnableDetailedErrors = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -104,7 +111,14 @@ namespace WebAuthAPI
 
             app.UseSession();
 
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<AuthHub>("auth-hub");
+            });
+
             app.UseMvc();
+
+
         }
     }
 }
