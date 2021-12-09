@@ -39,10 +39,16 @@ namespace WebAuthAPI
         {
             services.AddCors();
 
-            // Sets the default scheme to cookies
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
+            });
+
+            // Sets the default scheme to JWT
             services.AddAuthentication(JWTAuthScheme)
                 .AddJwtBearer(JWTAuthScheme, options =>
                 {
+                    
                     // Configure JWT Bearer Auth to expect our security key
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
@@ -95,13 +101,16 @@ namespace WebAuthAPI
             // Enable CORS so the Vue client can send requests
             app.UseCors(builder =>
                 builder
-                    .WithOrigins("http://localhost:8080")
+                    .WithOrigins("http://localhost:8080",
+                    "http://47.243.36.69:100")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
             );
 
+            app.UseCookiePolicy();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseHttpsRedirection();
 

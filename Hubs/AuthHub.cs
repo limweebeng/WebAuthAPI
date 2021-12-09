@@ -86,15 +86,14 @@ namespace WebAuthAPI.Hubs
 
         public void ForceLogout(string dbID, string email)
         {
-            string connectionID = this.forceLogout(dbID, email);
-            if (connectionID != null)
-            {
-                Clients.Client(connectionID).ForceLogoutEx();
-            }
+            List<string> connectionIDList = this.forceLogout(dbID, email);
+            foreach (string connectionID in connectionIDList)
+                Clients.Client(connectionID).ForceLogoutEx(); // need to implement task
         }
 
-        private string forceLogout(string dbID, string email)
+        private List<string> forceLogout(string dbID, string email)
         {
+            List<string> stList = new List<string>();
             if (ActiveUsersDic.ContainsKey(dbID))
             {
                 User receiver = this.getUser(dbID, email);
@@ -105,15 +104,16 @@ namespace WebAuthAPI.Hubs
                         string connectionId = Context.ConnectionId;
                         if (receiver.ConnectionIds.Contains(connectionId))
                         {
-                            if (receiver.ConnectionIds.First() != connectionId)
+                            foreach (string stID in receiver.ConnectionIds)
                             {
-                                return receiver.ConnectionIds.First();
+                                if (stID != connectionId)
+                                    stList.Add(stID);
                             }
                         }
                     }
                 }
             }
-            return null;
+            return stList;
         }
 
         private User getUser(string dbID, string userName)

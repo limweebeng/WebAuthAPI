@@ -7,6 +7,6 @@ namespace WebAuthAPI.Hubs
 {
     public interface IAuth
     {
-        void ForceLogoutEx();
+        Task ForceLogoutEx();
     }
 }
