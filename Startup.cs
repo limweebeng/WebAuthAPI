@@ -101,8 +101,7 @@ namespace WebAuthAPI
             // Enable CORS so the Vue client can send requests
             app.UseCors(builder =>
                 builder
-                    .WithOrigins("http://localhost:8080",
-                    "http://47.243.36.69:100")
+                    .WithOrigins("http://localhost:8080")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
@@ -110,7 +109,7 @@ namespace WebAuthAPI
 
             app.UseCookiePolicy();
             app.UseAuthentication();
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseHttpsRedirection();
 
