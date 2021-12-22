@@ -162,6 +162,54 @@ namespace WebAuthAPI.Controllers
             }
         }
 
+        [HttpPost("password/{dbID}")]
+        public ActionResult ForgotPassword(string dbID, [FromBody] LicenseModel license)
+        {
+            string errorLog = "";
+            string errorCode = "";
+            try
+            {
+                string stKey = dbID;
+                ProjectModel pm = null;
+                if (Startup.ProjectModelDic.ContainsKey(stKey))
+                {
+                    string stValue = Startup.ProjectModelDic[stKey];
+                    pm = JsonConvert.DeserializeObject<ProjectModel>(stValue);
+                }
+                else
+                {
+                    pm = WebAuthAction.GetProjectModel(stKey);
+                    string json = JsonConvert.SerializeObject(pm);
+                    Startup.ProjectModelDic.Add(stKey, json);
+                }
+
+                if (pm != null)
+                {
+                    WebAuthAction.ForgotPassword(license, pm, out errorCode);
+                    if (errorCode == "")
+                        errorCode = "success_forgotpw";
+                }
+                else
+                    errorCode = "err_server";
+            }
+            catch (Exception ex)
+            {
+                errorLog = ex.ToString();
+            }
+            finally
+            {
+
+            }
+            if (errorLog == "")
+            {
+                return Ok(errorCode);
+            }
+            else
+            {
+                return BadRequest(errorLog);
+            }
+        }
+
         [HttpPost("edit/{dbID}")]
         [Authorize]
         public ActionResult EditProfile(string dbID, [FromBody] LicenseModel license)

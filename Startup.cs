@@ -42,6 +42,7 @@ namespace WebAuthAPI
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
+                options.Secure = Microsoft.AspNetCore.Http.CookieSecurePolicy.Always;
             });
 
             // Sets the default scheme to JWT
