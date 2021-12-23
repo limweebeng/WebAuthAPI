@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XWo+IL7uB1AH5FaVUiEE5GuGmOrdaFAsXsbx4NQoVVoSuBhKt2xTha71pKuSIcff6OiG6TZJrDpxpsm9vmo8rg==",
+  "dgSpecHash": "QUeYhH8vfSWnAvVaREZrG45JFde3YlaVIWRzzr5ZQP3OstdPvKiSpXkERBIrdu4klL4HbuYc3mhVSfOVJV54eA==",
   "success": true,
   "projectFilePath": "C:\\OA\\OA Code\\WebAuthAPI\\WebAuthAPI.csproj",
   "expectedPackageFiles": [
@@ -19,7 +19,8 @@
     "C:\\Users\\LIM\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\LIM\\.nuget\\packages\\system.identitymodel.tokens.jwt\\5.5.0\\system.identitymodel.tokens.jwt.5.5.0.nupkg.sha512",
     "C:\\Users\\LIM\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
-    "C:\\Users\\LIM\\.nuget\\packages\\system.security.cryptography.cng\\4.5.0\\system.security.cryptography.cng.4.5.0.nupkg.sha512"
+    "C:\\Users\\LIM\\.nuget\\packages\\system.security.cryptography.cng\\4.5.0\\system.security.cryptography.cng.4.5.0.nupkg.sha512",
+    "C:\\Users\\LIM\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512"
   ],
   "logs": []
 }

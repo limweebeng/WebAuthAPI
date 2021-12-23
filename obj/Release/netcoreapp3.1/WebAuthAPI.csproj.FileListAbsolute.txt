@@ -37,8 +37,6 @@ C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\WebAuthAPI.AssemblyInfo.cs
 C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\WebAuthAPI.csproj.CoreCompileInputs.cache
 C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\WebAuthAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\staticwebassets\WebAuthAPI.StaticWebAssets.Manifest.cache
-C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\staticwebassets\WebAuthAPI.StaticWebAssets.xml
-C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\scopedcss\bundle\WebAuthAPI.styles.css
 C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\WebAuthAPI.RazorTargetAssemblyInfo.cache
 C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\WebAuthAPI.csproj.CopyComplete
 C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\WebAuthAPI.dll

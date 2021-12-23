@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using OA.AuthLibrary;
 using OA.WebAuthLibrary;
+using System.IO;
 using System.Text;
 
 namespace WebAuthAPI
@@ -20,9 +21,15 @@ namespace WebAuthAPI
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+               .ConfigureWebHostDefaults(webBuilder =>
+               {
+                   webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
+                   webBuilder.UseIISIntegration();
+                   webBuilder.ConfigureKestrel(options =>
+                   {
+                       options.Limits.MaxRequestBodySize = long.MaxValue;
+                   })
+                   .UseStartup<Startup>();
+               });
     }
 }

@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "03d14e1a-f2f3-40a3-8aa5-425cee44b541": {
+      "ProjectGuid": "03d14e1a-f2f3-40a3-8aa5-425cee44b541",
+      "DisplayName": "WebAuthAPI",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

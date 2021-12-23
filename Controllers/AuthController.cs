@@ -81,38 +81,8 @@ namespace WebAuthAPI.Controllers
             return Ok(fi.Length.ToString());
         }
 
-        [HttpPost()]
-        public ActionResult UploadAuthWeb(IFormFile file)
-        {
-            if (file == null || file.Length == 0)
-                return Ok("No file is selected.");
-
-            if (!TextHelper.IsMultipartContentType(HttpContext.Request.ContentType))
-                return StatusCode(415);
-            string errorLog = "";
-            try
-            {
-                using (var stream = System.IO.File.Create(WebAuthHelper.AuthWebFilePath))
-                {
-                    file.CopyTo(stream);
-                }
-            }
-            catch (Exception ex)
-            {
-                errorLog = ex.ToString();
-            }
-            finally
-            {
-
-            }
-
-            if (errorLog == "")
-                return Ok();
-            else
-                return BadRequest(errorLog);
-        }
-
         [HttpPost("web")]
+        [DisableRequestSizeLimit]
         public async System.Threading.Tasks.Task<ActionResult> UploadAuthWebEx(IFormFile file)
         {
             if (file == null || file.Length == 0)
@@ -144,11 +114,15 @@ namespace WebAuthAPI.Controllers
                             await output.WriteAsync(buffer, 0, readBytes);
                             totalReadBytes += readBytes;
                             int progress = (int)((float)totalReadBytes / (float)totalBytes * 100.0);
-                            Startup.ProgressAuth = progress;
-                            await System.Threading.Tasks.Task.Delay(100);
+                            if (Startup.ProgressAuth != progress && progress > Startup.ProgressAuth)
+                            {
+                                Startup.ProgressAuth = progress;
+                                await System.Threading.Tasks.Task.Delay(100);
+                            }
                         }
                     }
                 }
+                Startup.ProgressAuth = 0;
             }
             catch (Exception ex)
             {
@@ -174,42 +148,8 @@ namespace WebAuthAPI.Controllers
         }
 
 
-        [HttpPost("db/{dbID}")]
-        public ActionResult UploadDBWeb(string dbID, IFormFile file)
-        {
-            if (file == null || file.Length == 0)
-                return Ok("No file is selected.");
-
-            if (!TextHelper.IsMultipartContentType(HttpContext.Request.ContentType))
-                return StatusCode(415);
-
-            string errorLog = "";
-            try
-            {
-                string filePath = Path.Combine(WebAuthHelper.MainFolder, dbID);
-                filePath = Path.Combine(filePath, WebAuthHelper.DatabaseWeb);
-                using (var stream = System.IO.File.Create(filePath))
-                {
-                    file.CopyTo(stream);
-                }
-            }
-            catch (Exception ex)
-            {
-                errorLog = ex.ToString();
-            }
-            finally
-            {
-
-            }
-
-            if (errorLog == "")
-                return Ok();
-            else
-                return BadRequest(errorLog);
-        }
-
-
         [HttpPost("web/db/{dbID}")]
+        [DisableRequestSizeLimit]
         public async System.Threading.Tasks.Task<ActionResult> UploadDBWebEx(string dbID, IFormFile file)
         {
             if (file == null || file.Length == 0)
@@ -221,10 +161,10 @@ namespace WebAuthAPI.Controllers
             string errorLog = "";
             try
             {
-                if (Startup.ProgressDBDic.ContainsKey(dbID))
-                    Startup.ProgressDBDic[dbID] = 0;
-                else
+                if (!Startup.ProgressDBDic.ContainsKey(dbID))
                     Startup.ProgressDBDic.Add(dbID, 0);
+                Startup.ProgressDBDic[dbID] = 0;
+                
                 long totalBytes = file.Length;
                 ContentDispositionHeaderValue contentDispositionHeaderValue =
                         ContentDispositionHeaderValue.Parse(file.ContentDisposition);
@@ -243,12 +183,16 @@ namespace WebAuthAPI.Controllers
                         {
                             await output.WriteAsync(buffer, 0, readBytes);
                             totalReadBytes += readBytes;
-                            int progress = (int)((float)totalReadBytes / (float)totalBytes * 100.0);
-                            Startup.ProgressDBDic[dbID] = progress;
-                            await System.Threading.Tasks.Task.Delay(100);
+                            int progress = (int)((float)totalReadBytes * 100 / (float)totalBytes);
+                            if (Startup.ProgressDBDic[dbID] != progress && progress > Startup.ProgressDBDic[dbID])
+                            {
+                                Startup.ProgressDBDic[dbID] = progress;
+                                await System.Threading.Tasks.Task.Delay(100);
+                            }
                         }
                     }
                 }
+                Startup.ProgressDBDic.Remove(dbID);
             }
             catch (Exception ex)
             {
@@ -271,11 +215,6 @@ namespace WebAuthAPI.Controllers
             int progress = 0;
             if (Startup.ProgressDBDic.ContainsKey(dbID))
                 progress = Startup.ProgressDBDic[dbID];
-            else
-            {
-                Startup.ProgressDBDic.Add(dbID, 0);
-                progress = Startup.ProgressDBDic[dbID];
-            }
 
             return Content(progress.ToString());
         }
