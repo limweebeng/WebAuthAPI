@@ -5,7 +5,17 @@
       "ProjectGuid": "03d14e1a-f2f3-40a3-8aa5-425cee44b541",
       "DisplayName": "WebAuthAPI",
       "ColorIndex": 0
+    },
+    "cc29500b-b9bb-4e96-a018-64abeab4cffd": {
+      "ProjectGuid": "cc29500b-b9bb-4e96-a018-64abeab4cffd",
+      "DisplayName": "OA.WebAuthLibrary",
+      "ColorIndex": 1
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 2
 }

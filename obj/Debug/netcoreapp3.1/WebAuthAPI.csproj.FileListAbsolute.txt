@@ -42,3 +42,10 @@ C:\OA\OA Code\WebAuthAPI\obj\Debug\netcoreapp3.1\WebAuthAPI.genruntimeconfig.cac
 C:\OA\OA Code\WebAuthAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
 C:\OA\OA Code\WebAuthAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\OA\OA Code\WebAuthAPI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\OA\OA Code\WebAuthAPI\bin\Debug\netcoreapp3.1\ProjectHelper.dll
+C:\OA\OA Code\WebAuthAPI\bin\Debug\netcoreapp3.1\InterfaceShared.dll
+C:\OA\OA Code\WebAuthAPI\bin\Debug\netcoreapp3.1\EngineShared.dll
+C:\OA\OA Code\WebAuthAPI\bin\Debug\netcoreapp3.1\FarPointHelper.dll
+C:\OA\OA Code\WebAuthAPI\bin\Debug\netcoreapp3.1\HelperEx.dll
+C:\OA\OA Code\WebAuthAPI\bin\Debug\netcoreapp3.1\MySql.Data.dll
+C:\OA\OA Code\WebAuthAPI\bin\Debug\netcoreapp3.1\Renci.SshNet.dll

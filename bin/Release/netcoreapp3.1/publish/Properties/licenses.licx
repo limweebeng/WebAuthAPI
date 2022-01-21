@@ -1,0 +1,8 @@
+FarPoint.Win.Spread.FormulaTextBox, FarPoint.Win.Spread, Version=13.45.20203.0, Culture=neutral, PublicKeyToken=327c3516b1b18457
+FarPoint.Win.Spread.FpSpread, FarPoint.Win.Spread, Version=13.45.20203.0, Culture=neutral, PublicKeyToken=327c3516b1b18457
+FarPoint.Win.Spread.Design.FpSpreadDesigner, FarPoint.Win.Spread.Design, Version=13.45.20203.0, Culture=neutral, PublicKeyToken=327c3516b1b18457
+C1.Win.C1InputPanel.C1InputPanel, C1.Win.C1InputPanel.4, Version=4.0.20183.347, Culture=neutral, PublicKeyToken=79882d576c6336da
+C1.Win.C1Ribbon.C1Ribbon, C1.Win.C1Ribbon.4, Version=4.0.20183.347, Culture=neutral, PublicKeyToken=79882d576c6336da
+C1.Win.C1Ribbon.C1StatusBar, C1.Win.C1Ribbon.4, Version=4.0.20183.347, Culture=neutral, PublicKeyToken=79882d576c6336da
+VectorDraw.Professional.Control.VectorDrawBaseControl, VDrawBaseControl, Version=8.8005.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53
+vdControls.vdFramedControl, vdFramedControl, Version=8.8005.1.0, Culture=neutral, PublicKeyToken=54eac14e23c9ee53

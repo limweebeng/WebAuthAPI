@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 using WebAuthAPI.Hubs;
@@ -26,6 +27,8 @@ namespace WebAuthAPI
         public static int ProgressAuth = 0;
 
         public static Dictionary<string, int> ProgressDBDic = new Dictionary<string, int>();
+
+        public static Dictionary<string, int> ProgressFileDic = new Dictionary<string, int>();
 
         public Startup(IConfiguration configuration)
         {
@@ -110,7 +113,6 @@ namespace WebAuthAPI
 
             app.UseCookiePolicy();
             app.UseAuthentication();
-            //app.UseAuthorization();
 
             app.UseHttpsRedirection();
 
