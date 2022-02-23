@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
@@ -46,6 +47,20 @@ namespace WebAuthAPI
             {
                 options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
                 options.Secure = Microsoft.AspNetCore.Http.CookieSecurePolicy.Always;
+            });
+
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.MaxRequestBodySize = int.MaxValue;
+            });
+
+            services.Configure<FormOptions>(o =>  // currently all set to max, configure it to your needs!
+            {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = long.MaxValue; // <-- !!! long.MaxValue
+                o.MultipartBoundaryLengthLimit = int.MaxValue;
+                o.MultipartHeadersCountLimit = int.MaxValue;
+                o.MultipartHeadersLengthLimit = int.MaxValue;
             });
 
             // Sets the default scheme to JWT
@@ -105,7 +120,7 @@ namespace WebAuthAPI
             // Enable CORS so the Vue client can send requests
             app.UseCors(builder =>
                 builder
-                    .WithOrigins("http://47.243.36.69:100", "http://localhost:8080")
+                    .WithOrigins("http://47.243.36.69:100", "http://localhost:8080", "http://192.168.0.12:8080")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
@@ -113,6 +128,12 @@ namespace WebAuthAPI
 
             app.UseCookiePolicy();
             app.UseAuthentication();
+
+            app.Use(async (context, next) =>
+            {
+                context.Features.Get<IHttpMaxRequestBodySizeFeature>().MaxRequestBodySize = null; // unlimited I guess
+                await next.Invoke();
+            });
 
             app.UseHttpsRedirection();
 

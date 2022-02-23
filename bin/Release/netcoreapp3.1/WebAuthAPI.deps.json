@@ -36,6 +36,7 @@
           "DotNetZip": "1.13.8.0",
           "Helper": "1.0.0.0",
           "OA.AuthLibrary": "1.0.0.0",
+          "ProjectHelper": "1.0.0.0",
           "Utilities": "1.0.0.0",
           "Accessibility": "4.0.0.0",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
@@ -594,6 +595,17 @@
           "OA.AuthLibrary.dll": {}
         }
       },
+      "ProjectHelper/1.0.0.0": {
+        "runtime": {
+          "ProjectHelper.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "ProjectHelper.dll": {}
+        }
+      },
       "Utilities/1.0.0.0": {
         "runtime": {
           "Utilities.dll": {
@@ -618,6 +630,54 @@
           "System.Data.SQLite.dll": {
             "assemblyVersion": "1.0.112.1",
             "fileVersion": "1.0.112.1"
+          }
+        }
+      },
+      "InterfaceShared/1.0.0.0": {
+        "runtime": {
+          "InterfaceShared.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "FarPointHelper/1.0.0.0": {
+        "runtime": {
+          "FarPointHelper.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "HelperEx/1.0.0.0": {
+        "runtime": {
+          "HelperEx.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "EngineShared/1.0.0.0": {
+        "runtime": {
+          "EngineShared.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "MySql.Data/8.0.23.0": {
+        "runtime": {
+          "MySql.Data.dll": {
+            "assemblyVersion": "8.0.23.0",
+            "fileVersion": "8.0.23.0"
+          }
+        }
+      },
+      "Renci.SshNet/2020.0.0.0": {
+        "runtime": {
+          "Renci.SshNet.dll": {
+            "assemblyVersion": "2020.0.0.0",
+            "fileVersion": "2020.0.0.0"
           }
         }
       },
@@ -2560,6 +2620,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "ProjectHelper/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Utilities/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
@@ -2571,6 +2636,36 @@
       "sha512": ""
     },
     "System.Data.SQLite/1.0.112.1": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "InterfaceShared/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FarPointHelper/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "HelperEx/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EngineShared/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MySql.Data/8.0.23.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Renci.SshNet/2020.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

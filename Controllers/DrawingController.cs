@@ -1,6 +1,7 @@
 ﻿using DataShared;
 using Helper;
 using Ionic.Zip;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace WebAuthAPI.Controllers
 {
@@ -24,7 +26,6 @@ namespace WebAuthAPI.Controllers
         private string _passCodeLicenser = DataShared.Properties.Resources.licenser;
         private IWebHostEnvironment _hostingEnvironment;
         private ILogger<DrawingController> _logger;
-        private string _tempFolder;
 
         #region Constructor
         public DrawingController(IWebHostEnvironment environment,
@@ -36,6 +37,7 @@ namespace WebAuthAPI.Controllers
         #endregion
 
         [HttpPost("fileList")]
+        [Authorize]
         public ActionResult GetFileList([FromBody] Dictionary<string, string> dicInput)
         {
             string json = "";
@@ -67,6 +69,8 @@ namespace WebAuthAPI.Controllers
                 {
                     string directory = Path.Combine(WebAuthHelper.MainFolder, dbID);
                     directory = Path.Combine(directory, ID);
+                    if (!Directory.Exists(directory))
+                        Directory.CreateDirectory(directory);
                     List<string> stList = Directory.GetFiles(directory, "*." + extension).Select(obj => Path.GetFileName(obj)).ToList();
                     Dictionary<string, string> dicOut = new Dictionary<string, string>();
                     string stFileList = JsonConvert.SerializeObject(stList);
@@ -90,6 +94,7 @@ namespace WebAuthAPI.Controllers
         }
 
         [HttpPost("fileDetails")]
+        [Authorize]
         public ActionResult GetFileDetails([FromBody] Dictionary<string, string> dicInput)
         {
             string json = "";
@@ -143,6 +148,8 @@ namespace WebAuthAPI.Controllers
                     {
                         string fileDirectory = Path.Combine(WebAuthHelper.MainFolder, dbID);
                         fileDirectory = Path.Combine(fileDirectory, ID);
+                        if (!Directory.Exists(fileDirectory))
+                            Directory.CreateDirectory(fileDirectory);
                         string filePath = Path.Combine(fileDirectory, fileName);
 
                         if (System.IO.File.Exists(filePath))
@@ -196,6 +203,7 @@ namespace WebAuthAPI.Controllers
         }
 
         [HttpDelete()]
+        [Authorize]
         public ActionResult DeleteFile([FromBody] Dictionary<string, string> dicInput)
         {
             string json = "";
@@ -228,6 +236,8 @@ namespace WebAuthAPI.Controllers
                 {
                     string filePath = Path.Combine(WebAuthHelper.MainFolder, dbID);
                     filePath = Path.Combine(filePath, ID);
+                    if (!Directory.Exists(filePath))
+                        Directory.CreateDirectory(filePath);
                     filePath = Path.Combine(filePath, fileName);
 
                     if (System.IO.File.Exists(filePath))
@@ -255,6 +265,7 @@ namespace WebAuthAPI.Controllers
         }
 
         [HttpPatch()]
+        [Authorize]
         public ActionResult IsDrawingExists([FromBody] Dictionary<string, string> dicInput)
         {
             string errorLog = "";
@@ -292,13 +303,21 @@ namespace WebAuthAPI.Controllers
                     jobAHUName = dicInput["jobAHUName"];
                     dicInput.Remove("jobAHUName");
                 }
-
+                string ext = Path.GetExtension(fileName);
+                if (!ext.EndsWith("MPD"))
+                {
+                    string ext1 = ext + "MPD";
+                    ext1 = ext1.Replace(".", "");
+                    fileName = Path.ChangeExtension(fileName, ext1);
+                }
                 Dictionary<string, string> dicOut = new Dictionary<string, string>();
                 if (dbID != null && ID != null && fileName != null
                     && orderNumber != null && jobAHUName != null)
                 {
                     string fileDirectory = Path.Combine(WebAuthHelper.MainFolder, dbID);
                     fileDirectory = Path.Combine(fileDirectory, ID);
+                    if (!Directory.Exists(fileDirectory))
+                        Directory.CreateDirectory(fileDirectory);
 
                     string filePath = Path.Combine(fileDirectory, fileName);
 
@@ -326,6 +345,7 @@ namespace WebAuthAPI.Controllers
 
         [HttpPost("upload/{dbID}/{ID}")]
         [DisableRequestSizeLimit]
+        [Authorize]
         public async System.Threading.Tasks.Task<ActionResult> UploadFile(string dbID, string ID, IFormFile file)
         {
             if (file == null || file.Length == 0)
@@ -336,6 +356,7 @@ namespace WebAuthAPI.Controllers
 
             string json = "";
             string errorLog = "";
+            string filePath = null;
 
             try
             {
@@ -364,7 +385,7 @@ namespace WebAuthAPI.Controllers
                             ContentDispositionHeaderValue.Parse(file.ContentDisposition);
                     string filename = contentDispositionHeaderValue.FileName.Trim('"');
                     byte[] buffer = new byte[16 * 1024];
-                    string filePath = Path.Combine(WebAuthHelper.MainFolder, dbID);
+                    filePath = Path.Combine(WebAuthHelper.MainFolder, dbID);
                     filePath = Path.Combine(filePath, ID);
                     string directory = filePath;
                     if (!Directory.Exists(directory))
@@ -418,6 +439,11 @@ namespace WebAuthAPI.Controllers
                                 string stPrjInfo = JsonConvert.SerializeObject(prjHelper.prjInfo);
                                 dicOut.Add("prjInfo", stPrjInfo);
                             }
+                            else
+                            {
+                                if (System.IO.File.Exists(newfilePath))
+                                    System.IO.File.Delete(newfilePath);
+                            }
                         }
                         else
                             errorCode = "err_invalidreqres";
@@ -436,7 +462,8 @@ namespace WebAuthAPI.Controllers
             }
             finally
             {
-                
+                if (System.IO.File.Exists(filePath))
+                    System.IO.File.Delete(filePath);
             }
 
             if (errorLog == "")
@@ -446,6 +473,7 @@ namespace WebAuthAPI.Controllers
         }
 
         [HttpPost("generate")]
+        [Authorize]
         public ActionResult GenerateDrawing([FromBody] Dictionary<string, string> dicInput)
         {
             string json = "";
@@ -459,6 +487,7 @@ namespace WebAuthAPI.Controllers
                 string orderNumber = null;
                 string jobAHUName = null;
                 string jobAHUCode = null;
+                bool listDrawingStatus = false;
 
                 if (dicInput.ContainsKey("dbID"))
                 {
@@ -490,6 +519,12 @@ namespace WebAuthAPI.Controllers
                     jobAHUCode = dicInput["jobAHUCode"];
                     dicInput.Remove("jobAHUCode");
                 }
+                if (dicInput.ContainsKey("listDrawing"))
+                {
+                    listDrawingStatus = dicInput["listDrawing"] == "1";
+                    dicInput.Remove("listDrawing");
+                }
+
 
                 string stKey = dbID;
                 ProjectModel pm = null;
@@ -515,17 +550,23 @@ namespace WebAuthAPI.Controllers
                         && zipCode != null && orderNumber != null && jobAHUName != null
                         && jobAHUCode != null)
                     {
-                        string dbFilePath = Path.Combine(WebAuthHelper.MainFolder, dbID);
-                        dbFilePath = Path.Combine(dbFilePath, WebAuthHelper.DatabaseWeb);
+                        string dbFolder = Path.Combine(WebAuthHelper.MainFolder, dbID);
+                        dbFolder = Path.Combine(dbFolder, "database");
 
                         string fileDirectory = Path.Combine(WebAuthHelper.MainFolder, dbID);
                         fileDirectory = Path.Combine(fileDirectory, ID);
+                        if (!Directory.Exists(fileDirectory))
+                            Directory.CreateDirectory(fileDirectory);
 
                         string filePath = Path.Combine(fileDirectory, fileName);
                         string jobName = orderNumber + "-" + jobAHUName;
                         tempFolder = Path.Combine(fileDirectory, jobName);
                         if (!Directory.Exists(tempFolder))
                             Directory.CreateDirectory(tempFolder);
+
+                        string newDirectory = Path.Combine(tempFolder, "database");
+                        DataHelper.DirectoryCopy(dbFolder, newDirectory, true);
+                        string dbFilePath = Path.Combine(newDirectory, WebAuthHelper.DatabaseWeb);
 
                         string locationExe = Path.Combine(WebAuthHelper.MainFolder, dbID);
                         locationExe = Path.Combine(locationExe, "dlls");
@@ -542,12 +583,14 @@ namespace WebAuthAPI.Controllers
                             sw.WriteLine("dbZipCode=" + dbID);
                             sw.WriteLine("zipCode=" + zipCode);
                         }
-
-                        WebDatabaseHelper.RunExternalExe(locationExe, inputFilePath);
+                        if (listDrawingStatus)
+                            WebDatabaseHelper.RunExternalExe(locationExe, inputFilePath, 2);
+                        else
+                            WebDatabaseHelper.RunExternalExe(locationExe, inputFilePath, 0);
 
                         string outputFilePath = Path.Combine(tempFolder, "output.txt");
                         int count = 0;
-                        while(!System.IO.File.Exists(outputFilePath))
+                        while (!System.IO.File.Exists(outputFilePath))
                         {
                             if (count > 120)
                                 break;
@@ -601,6 +644,7 @@ namespace WebAuthAPI.Controllers
         }
 
         [HttpPost("show")]
+        [Authorize]
         public ActionResult ShowDrawing([FromBody] Dictionary<string, string> dicInput)
         {
             string json = "";
@@ -685,11 +729,10 @@ namespace WebAuthAPI.Controllers
                         && zipCode != null && orderNumber != null && jobAHUName != null
                         && drawingFolder != null && drawingName != null && drawingExtension != null)
                     {
-                        string dbFilePath = Path.Combine(WebAuthHelper.MainFolder, dbID);
-                        dbFilePath = Path.Combine(dbFilePath, WebAuthHelper.DatabaseWeb);
-
                         string fileDirectory = Path.Combine(WebAuthHelper.MainFolder, dbID);
                         fileDirectory = Path.Combine(fileDirectory, ID);
+                        if (!Directory.Exists(fileDirectory))
+                            Directory.CreateDirectory(fileDirectory);
 
                         string filePath = Path.Combine(fileDirectory, fileName);
                         string jobName = orderNumber + "-" + jobAHUName;
@@ -713,7 +756,7 @@ namespace WebAuthAPI.Controllers
                             sw.WriteLine("dwgExt=" + drawingExtension);
                         }
 
-                        WebDatabaseHelper.RunExternalExe(locationExe, inputFilePath, true);
+                        WebDatabaseHelper.RunExternalExe(locationExe, inputFilePath, 1);
 
                         string outputFilePath = Path.Combine(tempFolder, "output.txt");
                         int count = 0;
@@ -751,6 +794,19 @@ namespace WebAuthAPI.Controllers
                                     }
                                     
                                 }
+                                else if (drawingExtension == ".dwg" || drawingExtension == ".pdf")
+                                {
+                                    string filepath = dicOutput["dwgFilePath"];
+                                    System.IO.FileStream fs = new System.IO.FileStream(filepath, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+                                    System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                                    fs.CopyTo(ms);
+                                    fs.Close();
+                                    var contentType = "APPLICATION/octet-stream";
+                                    var filename = Path.GetFileName(filepath);
+                                    FileStreamResult fsTemp = File(ms, contentType, filename);
+                                    fsTemp.FileStream.Position = 0;
+                                    return fsTemp;
+                                }
                             }
                         }
                         else
@@ -780,5 +836,7 @@ namespace WebAuthAPI.Controllers
             else
                 return BadRequest(errorLog);
         }
+
+       
     }
 }

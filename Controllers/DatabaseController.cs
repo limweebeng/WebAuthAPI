@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace WebAuthAPI.Controllers
 {
@@ -65,6 +66,33 @@ namespace WebAuthAPI.Controllers
             }
             if (errorLog == "")
                 return Ok(json);
+            else
+                return BadRequest(errorLog);
+        }
+
+        [HttpPut("update/{dbID}")]
+        public ActionResult UpdateErrorMsg(string dbID)
+        {
+            string errorLog = "";
+            try
+            {
+                string dbFolder = Path.Combine(WebAuthHelper.MainFolder, dbID);
+                dbFolder = Path.Combine(dbFolder, "database");
+                string dbFilePath = Path.Combine(dbFolder, WebAuthHelper.DatabaseWeb);
+
+                WebAuthHelper.UpdateErrorMessage(dbFilePath, dbID);
+
+            }
+            catch (Exception ex)
+            {
+                errorLog = ex.ToString();
+            }
+            finally
+            {
+
+            }
+            if (errorLog == "")
+                return Ok();
             else
                 return BadRequest(errorLog);
         }

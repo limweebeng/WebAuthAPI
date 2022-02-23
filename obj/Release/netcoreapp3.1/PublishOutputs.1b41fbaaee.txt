@@ -24,8 +24,15 @@ C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\PubTmp\Out\DotNetZip.dll
 C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\PubTmp\Out\Helper.dll
 C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\PubTmp\Out\OA.AuthLibrary.dll
 C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\PubTmp\Out\OA.WebAuthLibrary.dll
+C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\PubTmp\Out\ProjectHelper.dll
 C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\PubTmp\Out\Utilities.dll
 C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\PubTmp\Out\RestSharp.dll
 C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\PubTmp\Out\System.Data.SQLite.dll
+C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\PubTmp\Out\InterfaceShared.dll
+C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\PubTmp\Out\FarPointHelper.dll
+C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\PubTmp\Out\HelperEx.dll
+C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\PubTmp\Out\EngineShared.dll
+C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\PubTmp\Out\MySql.Data.dll
+C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\PubTmp\Out\Renci.SshNet.dll
 C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\PubTmp\Out\OA.WebAuthLibrary.pdb
 C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\PubTmp\Out\OA.WebAuthLibrary.dll.config

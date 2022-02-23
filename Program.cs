@@ -12,6 +12,7 @@ namespace WebAuthAPI
         public static void Main(string[] args)
         {
             System.Text.Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            
             WebAuthHelper.UpdateErrorMessage(WebAuthHelper.AuthWebFilePath);
             AuthEngine.UpdateLocation(WebAuthHelper.AuthWebFilePath, DataShared.Properties.Resources.licenser);
             WebAuthHelper.UpdateLanguage(WebAuthHelper.AuthWebFilePath);

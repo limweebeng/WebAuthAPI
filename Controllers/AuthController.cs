@@ -55,6 +55,7 @@ namespace WebAuthAPI.Controllers
         public ActionResult GetDBWeb(string dbID)
         {
             string filePath = Path.Combine(WebAuthHelper.MainFolder, dbID);
+            filePath = Path.Combine(filePath, "database");
             filePath = Path.Combine(filePath, WebAuthHelper.DatabaseWeb);
 
             if (System.IO.File.Exists(filePath))
@@ -76,6 +77,7 @@ namespace WebAuthAPI.Controllers
         public ActionResult GetDBWebSize(string dbID)
         {
             string filePath = Path.Combine(WebAuthHelper.MainFolder, dbID);
+            filePath = Path.Combine(filePath, "database");
             filePath = Path.Combine(filePath, WebAuthHelper.DatabaseWeb);
             FileInfo fi = new FileInfo(filePath);
             return Ok(fi.Length.ToString());
@@ -164,13 +166,14 @@ namespace WebAuthAPI.Controllers
                 if (!Startup.ProgressDBDic.ContainsKey(dbID))
                     Startup.ProgressDBDic.Add(dbID, 0);
                 Startup.ProgressDBDic[dbID] = 0;
-                
+
                 long totalBytes = file.Length;
                 ContentDispositionHeaderValue contentDispositionHeaderValue =
                         ContentDispositionHeaderValue.Parse(file.ContentDisposition);
                 string filename = contentDispositionHeaderValue.FileName.Trim('"');
                 byte[] buffer = new byte[16 * 1024];
                 string filePath = Path.Combine(WebAuthHelper.MainFolder, dbID);
+                filePath = Path.Combine(filePath, "database");
                 filePath = Path.Combine(filePath, WebAuthHelper.DatabaseWeb);
                 using (FileStream output = System.IO.File.Create(filePath))
                 {

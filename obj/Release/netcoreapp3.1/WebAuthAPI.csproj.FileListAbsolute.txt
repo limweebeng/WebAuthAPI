@@ -42,3 +42,10 @@ C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\WebAuthAPI.csproj.CopyComplet
 C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\WebAuthAPI.dll
 C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\WebAuthAPI.pdb
 C:\OA\OA Code\WebAuthAPI\obj\Release\netcoreapp3.1\WebAuthAPI.genruntimeconfig.cache
+C:\OA\OA Code\WebAuthAPI\bin\Release\netcoreapp3.1\ProjectHelper.dll
+C:\OA\OA Code\WebAuthAPI\bin\Release\netcoreapp3.1\InterfaceShared.dll
+C:\OA\OA Code\WebAuthAPI\bin\Release\netcoreapp3.1\FarPointHelper.dll
+C:\OA\OA Code\WebAuthAPI\bin\Release\netcoreapp3.1\HelperEx.dll
+C:\OA\OA Code\WebAuthAPI\bin\Release\netcoreapp3.1\EngineShared.dll
+C:\OA\OA Code\WebAuthAPI\bin\Release\netcoreapp3.1\MySql.Data.dll
+C:\OA\OA Code\WebAuthAPI\bin\Release\netcoreapp3.1\Renci.SshNet.dll
